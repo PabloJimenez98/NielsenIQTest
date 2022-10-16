@@ -85,7 +85,12 @@ def load_json(path):
 def main():
     start = time.time()
 
-    update_json('yellow_tripdata_2022-01.parquet')
+    # update_json('yellow_tripdata_2022-01.parquet')
+
+    df = pd.read_parquet('yellow_tripdata_2022-01.parquet', engine='pyarrow')
+    df.head(5).to_csv('test_5_rows.csv')
+    df = pd.read_csv('test_5_rows.csv')
+    print(df)
 
     end = time.time()
     print("Total time: " + str(end - start))
