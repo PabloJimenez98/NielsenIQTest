@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Build'
+                 withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'pip3 install -r requirements.txt'
+                }
             }
         }
         stage('Test') {
