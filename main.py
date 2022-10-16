@@ -88,8 +88,8 @@ def main():
     # update_json('yellow_tripdata_2022-01.parquet')
 
     df = pd.read_parquet('yellow_tripdata_2022-01.parquet', engine='pyarrow')
-    df.head(5).to_csv('test_5_rows.csv')
-    df = pd.read_csv('test_5_rows.csv')
+    df.loc[5000:5010].to_parquet('test_10_rows.parquet')
+    df = pd.read_parquet('test_5_rows.parquet')
     print(df)
 
     end = time.time()
