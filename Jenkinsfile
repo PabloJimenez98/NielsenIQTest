@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
 //                 sh 'virtualenv venv && . venv/Scripts/activate && pip install -r requirements.txt '
-                sh ' ls'
+                bat ' ls'
             }
         }
         stage('Test') {
