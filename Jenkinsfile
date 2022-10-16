@@ -4,9 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'pip3 install -r requirements.txt'
+                if (fileExists('requirements.txt')) {
+                    sh """
+                    . .env/bin/activate
+                    pip3 install -r requirements.txt
+                    """
                 }
+
             }
         }
         stage('Test') {
