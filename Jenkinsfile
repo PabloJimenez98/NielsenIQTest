@@ -4,12 +4,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                if (fileExists('requirements.txt')) {
-                    sh """
-                    . .env/bin/activate
-                    pip3 install -r requirements.txt
-                    """
-                }
+                 sh """
+                . .env/bin/activate
+                pip3 install -r requirements.txt
+                """
 
             }
         }
