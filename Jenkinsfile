@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 bat 'virtualenv venv && . venv/Scripts/activate && pip install -r requirements.txt '
+                 bat 'pip install virtualenv && virtualenv venv && . venv/Scripts/activate && pip install -r requirements.txt '
             }
         }
         stage('Test') {
