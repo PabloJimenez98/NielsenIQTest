@@ -2,6 +2,10 @@ import sys
 import json
 import pandas as pd
 
+
+# This script loads a new parquet file.
+# For this it separates them by dates to save them independently in json files.
+# For each json file it will generate the required metrics.
 class LoadData:
     def load_json(path):
         df = pd.read_parquet(path, engine='pyarrow')
@@ -14,7 +18,8 @@ class LoadData:
             day = str(day.day)
             samples = len(df_day.index)
 
-            dic["avg_price_pre_mile_pre_customer"] = (df_day["total_amount"].mean() / df_day["passenger_count"].mean()) / df_day["trip_distance"].mean()
+            dic["avg_price_pre_mile_pre_customer"] = (df_day["total_amount"].mean() / df_day[
+                "passenger_count"].mean()) / df_day["trip_distance"].mean()
 
             values = df_day["payment_type"].value_counts()
             for index, val in values.items():
@@ -32,4 +37,3 @@ class LoadData:
 
 if __name__ == "__main__":
     LoadData.load_json(sys.argv[1])
-

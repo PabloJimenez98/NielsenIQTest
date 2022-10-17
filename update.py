@@ -4,6 +4,10 @@ from os.path import exists
 import pandas as pd
 
 
+# This script loads a parquet file.
+# For this it separates them by dates to save them independently in json files.
+# If the json file already exists it updates it with the new values
+#   or if it does not exist it creates it and generates its metrics.
 class UpdateData:
 
     def update_json(path):
@@ -31,7 +35,7 @@ class UpdateData:
                 values = df_day["payment_type"].value_counts()
                 for index, val in values.items():
                     dic["payment_dist_" + str(index)] = ((val / samples) * per_act) + (
-                                origin["payment_dist_" + str(index)] * per_origin)
+                            origin["payment_dist_" + str(index)] * per_origin)
 
                 dic["custom_indicator"] = (((df_day["tip_amount"].mean() + df_day["extra"].mean()) / df_day[
                     "trip_distance"].mean()) * per_act) + (origin['custom_indicator'] * per_origin)
@@ -62,4 +66,3 @@ class UpdateData:
 
 if __name__ == "__main__":
     UpdateData.update_json(sys.argv[1])
-

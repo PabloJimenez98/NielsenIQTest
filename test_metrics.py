@@ -2,7 +2,6 @@ import unittest
 from load import LoadData
 from update import UpdateData
 import pandas as pd
-import pathlib as pl
 import json
 
 
